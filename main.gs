@@ -23,6 +23,9 @@ function include(filename) {
 }
 
 function updateAllTriggers() {
+  var emailSnapshotRequestHr = loadSetting('emailSnapshotRequestHr');
+  var updateSnapshotHr = loadSetting('updateSnapshotHr');
+
   //Delete all existing triggers
   deleteTriggers();
   

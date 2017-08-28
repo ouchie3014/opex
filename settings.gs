@@ -1,5 +1,6 @@
 function initSheet() {
-
+  //Run this only if any of these defaults are changed. This will overwrite all settings in scriptProperties.
+  
   //Sheet Names:
   var sheetNameMainDefault = "MainDB";
   var sheetNameInventoryDefault = "InventoryDB";
@@ -22,15 +23,15 @@ function initSheet() {
   var snapshotFolderIdDefault = '0BwtCesct9-1EQk1jMnZsM2h1aXc';
   
   
-  // ----------- DO NOT EDIT BELOW THIS LINE ----------- //
+  // ----------------------------------------------------------------------------------------------- //
+  // --------------------------------- DO NOT EDIT BELOW THIS LINE --------------------------------- //
+  // ----------------------------------------------------------------------------------------------- //
   
-  
-  
-  var scriptProperties = PropertiesService.getScriptProperties();
-  
-  
+  //Delete previous settings
   deleteAllSettings();
   
+  //Store new settings
+  var scriptProperties = PropertiesService.getScriptProperties();
 
   scriptProperties.setProperty('sheetNameMain', sheetNameMainDefault);
   scriptProperties.setProperty('sheetNameInventory', sheetNameInventoryDefault);
@@ -51,19 +52,10 @@ function initSheet() {
   scriptProperties.setProperty('snapshotFolderId', snapshotFolderIdDefault);
   
   console.log("Sheet Initialized! Default settings stored!");
-  
-  
 }
 
 
-
-
-
-
-
-
-
-
+//Used to quickly get stored settings
 function loadSetting(name) {
   var scriptProperties = PropertiesService.getScriptProperties();
   var output = scriptProperties.getProperty(name) || '';
@@ -72,7 +64,7 @@ function loadSetting(name) {
 
 
 
-function testtt() {
+function unused() {
 //Location ID's:
   var mainSSid = scriptProperties.getProperty('mainSSid') || mainSSidDefault;
   var snapshotSSid = scriptProperties.getProperty('snapshotSSid') || snapshotSSidDefault;
@@ -102,19 +94,7 @@ function testtt() {
   var inventorySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameInventory);
   var pmDataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNamePM);
   var snapshotSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameSnapshot);
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
 
 
