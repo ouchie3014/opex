@@ -61,7 +61,22 @@ function deleteTriggers() {
 function formatDate(rawDate) {
   var date = "";
   if (rawDate) {
-    date = Utilities.formatDate(rawDate, "GMT", "MM/dd/yyy");
+    date = Utilities.formatDate(rawDate, "GMT", "MM/dd/yyyy");
+  }
+  return date;
+}
+
+//Returns date with format yyyy-MM-DD
+function dateFileName(rawDate) {
+  var date = "";
+  if (rawDate) {
+    var day = rawDate.getDate();
+    var month = rawDate.getMonth() + 1;
+    var year = rawDate.getFullYear();
+    if (day < 10) { day = "0" + day;}
+    if (month < 10) { month = "0" + month;}
+    date = year + "-" + month + "-" + day;
+    date = Utilities.formatDate(rawDate, "GMT", "yyyy-MM-dd");
   }
   return date;
 }
@@ -72,16 +87,22 @@ function onEdit () {
 }
 
 function getMainData () {
+  var sheetNameMain = loadSetting('sheetNameMain');
+  var mainSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameMain);
   var data = mainSheet.getRange(2,4,mainSheet.getLastRow()-1,7).getValues();
   console.log("Downloaded MainDB sheet data");
   return data;
 }
 function getInvData () {
+  var sheetNameInventory = loadSetting('sheetNameInventory');
+  var inventorySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameInventory);
   var data = inventorySheet.getDataRange().getValues();
   console.log("Downloaded InventoryDB sheet data");
   return data;
 }
 function getPmData () {
+  var sheetNamePM = loadSetting('sheetNamePM');
+  var pmDataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNamePM);
   var data = pmDataSheet.getDataRange().getValues();
   console.log("Downloaded Maintenance sheet data");
   return data;
@@ -94,6 +115,9 @@ function updateAllHelperLinks () {
   var mainRange = getMainData();
   var inventoryRange = getInvData();
   var pmData = getPmData();
+  
+  var sheetNameMain = loadSetting('sheetNameMain');
+  var mainSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameMain);
   
   var partsUsed = [];
   var partsRep = [];
@@ -295,6 +319,8 @@ function handleResponse(e) {
   lock.waitLock(30000);  // wait 30 seconds before conceding defeat.
 
   try {
+    var sheetNameMain = loadSetting('sheetNameMain');
+    var mainSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameMain);
     var nextRow = mainSheet.getLastRow()+1; // get next row
     var row = [];
     

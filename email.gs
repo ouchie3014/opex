@@ -20,7 +20,10 @@ function updateSnapshot() {
   console.log('Starting updateSnapshot()');
   console.time("updateSnapshot time");
   
-  var gmailSnapshotLabel = scriptProperties.getProperty('gmailSnapshotLabel') || gmailSnapshotLabelDefault;
+  var gmailSnapshotLabel = loadSetting('gmailSnapshotLabel');
+  var warehouse = loadSetting('warehouse');
+  var snapshotFolderId = loadSetting('snapshotFolderId');
+  var latestSnapshotSheet = loadSetting('latestSnapshotSheet');
   
   var label = GmailApp.getUserLabelByName(gmailSnapshotLabel);
   var threads = label.getThreads();
@@ -29,7 +32,7 @@ function updateSnapshot() {
   var blob = attachment[0].copyBlob();
   
   var date = msg[msg.length - 1].getDate();
-  var NewXlsFileName = warehouse + ' ' + dateFileName(date) + excelExtension;
+  var NewXlsFileName = warehouse + ' ' + dateFileName(date) + '.xls';
   var folder = DriveApp.getFolderById(snapshotFolderId); //Snapshot Folder on gDrive
   
   GmailApp.markMessageRead(msg[0]);
@@ -100,23 +103,13 @@ function findNewestFileId(folderId) {
 };
 
 
-//Returns date with format YY-MM-DD
-function dateFileName(rawDate) {
-  var date = "";
-  if (rawDate) {
-    var day = rawDate.getDate();
-    var month = rawDate.getMonth() + 1;
-    var year = rawDate.getFullYear();
-    if (day < 10) { day = "0" + day;}
-    if (month < 10) { month = "0" + month;}
-    date = year + "-" + month + "-" + day;
-  }
-  return date;
-}
-
-
 function copySnapshotData() {
   console.log('Copying data from temp sheet...');
+  var snapshotSSid = loadSetting('snapshotSSid');
+  var mainSSid = loadSetting('mainSSid');
+  var sheetNameSnapshot = loadSetting('sheetNameSnapshot');
+  var snapshotSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameSnapshot);
+  
   var sss = SpreadsheetApp.openById(snapshotSSid); // source
   var ss = sss.getActiveSheet();
   var SRange = ss.getDataRange();
