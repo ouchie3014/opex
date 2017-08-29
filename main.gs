@@ -42,6 +42,12 @@ function updateAllTriggers() {
       .everyDays(1)
       .create();
 
+  ScriptApp.newTrigger('backupSheetToXlsx')
+      .timeBased()
+      .atHour(1)
+      .everyDays(1)
+      .create();
+
   ScriptApp.newTrigger('updateAllTriggers')
       .timeBased()
       .atHour(1)
@@ -73,12 +79,12 @@ function formatDate(rawDate) {
 function dateFileName(rawDate) {
   var date = "";
   if (rawDate) {
-    var day = rawDate.getDate();
-    var month = rawDate.getMonth() + 1;
-    var year = rawDate.getFullYear();
-    if (day < 10) { day = "0" + day;}
-    if (month < 10) { month = "0" + month;}
-    date = year + "-" + month + "-" + day;
+    //var day = rawDate.getDate();
+    //var month = rawDate.getMonth() + 1;
+    //var year = rawDate.getFullYear();
+    //if (day < 10) { day = "0" + day;}
+    //if (month < 10) { month = "0" + month;}
+    //date = year + "-" + month + "-" + day;
     date = Utilities.formatDate(rawDate, "GMT", "yyyy-MM-dd");
   }
   return date;
