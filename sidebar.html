@@ -156,6 +156,15 @@
     <label for="snapshotFolderId">Snapshot Folder ID</label><br>
     <textarea name="snapshotFolderId" id="snapshotFolderId" rows="2" style="width:100%;"></textarea>
   </div>
+
+  <hr>
+
+  <h2>Backups:</h2>
+  
+  <div>
+    <input type="text" name="maxBackupsToKeep" id="maxBackupsToKeep" />
+    <label for="maxBackupsToKeep">Max Backups to Keep</label>
+  </div>
   
   <hr>
   
@@ -209,6 +218,8 @@
     document.getElementById('latestSnapshotSheet').value = sheetSettings.latestSnapshotSheet;
     document.getElementById('emailSnapshotRequestHr').value = parseInt(sheetSettings.emailSnapshotRequestHr);
     document.getElementById('updateSnapshotHr').value = parseInt(sheetSettings.updateSnapshotHr);
+    
+    document.getElementById('maxBackupsToKeep').value = parseInt(sheetSettings.maxBackupsToKeep);
     
     document.getElementById('mainSSid').value = sheetSettings.mainSSid;
     document.getElementById('snapshotSSid').value = sheetSettings.snapshotSSid;

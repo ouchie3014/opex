@@ -31,7 +31,7 @@ function backupSheetToXlsx() {
 function deleteOlderBackups() {
   console.info("Deleting older backups...");
   var folder = DriveApp.getFolderById('0BwtCesct9-1EU0Q3NzAxUGhrMXc'); //Backup storage folder
-  var maxBackupsToKeep = 10; //keep max of 10 files in this folder
+  var maxBackupsToKeep = loadSetting('maxBackupsToKeep'); //keep max of 30 files in this folder
   
   var files = folder.getFilesByType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
   var numOfFiles = countXlsxFilesInBackupFolder();
