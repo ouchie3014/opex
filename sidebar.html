@@ -156,6 +156,11 @@
     <label for="snapshotFolderId">Snapshot Folder ID</label><br>
     <textarea name="snapshotFolderId" id="snapshotFolderId" rows="2" style="width:100%;"></textarea>
   </div>
+  
+  <div>
+    <label for="autoBackupFolderId">AutoBackup Folder ID</label><br>
+    <textarea name="autoBackupFolderId" id="autoBackupFolderId" rows="2" style="width:100%;"></textarea>
+  </div>
 
   <hr>
 
@@ -224,6 +229,7 @@
     document.getElementById('mainSSid').value = sheetSettings.mainSSid;
     document.getElementById('snapshotSSid').value = sheetSettings.snapshotSSid;
     document.getElementById('snapshotFolderId').value = sheetSettings.snapshotFolderId; 
+    document.getElementById('autoBackupFolderId').value = sheetSettings.autoBackupFolderId; 
     
   }
   

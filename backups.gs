@@ -4,7 +4,8 @@ function backupSheetToXlsx() {
     console.info("Backing up main spreadsheet...");
     console.time("Backing up main spreadsheet...Completed! Time: ");
     var ss = SpreadsheetApp.getActive();
-    var folder = DriveApp.getFolderById('0BwtCesct9-1EU0Q3NzAxUGhrMXc'); //Backup storage folder
+    var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
+    var folder = DriveApp.getFolderById(autoBackupFolderId);
     var url = "https://docs.google.com/feeds/download/spreadsheets/Export?key=" + ss.getId() + "&exportFormat=xlsx";
     var params = {
       method      : "get",
@@ -30,7 +31,8 @@ function backupSheetToXlsx() {
 
 function deleteOlderBackups() {
   console.info("Deleting older backups...");
-  var folder = DriveApp.getFolderById('0BwtCesct9-1EU0Q3NzAxUGhrMXc'); //Backup storage folder
+  var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
+  var folder = DriveApp.getFolderById(autoBackupFolderId);
   var maxBackupsToKeep = loadSetting('maxBackupsToKeep'); //keep max of 30 files in this folder
   
   var files = folder.getFilesByType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -51,7 +53,8 @@ function deleteOlderBackups() {
 
 function countXlsxFilesInBackupFolder() {
   //Count number of files in backup folder
-  var folder = DriveApp.getFolderById('0BwtCesct9-1EU0Q3NzAxUGhrMXc'); //Backup storage folder
+  var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
+  var folder = DriveApp.getFolderById(autoBackupFolderId);
   var files = folder.getFilesByType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");  //xlsx files
   var numOfFiles = 0;
   while (files.hasNext()) {
@@ -64,7 +67,8 @@ function countXlsxFilesInBackupFolder() {
 
 function findOldestBackup() {
   //Find oldest excel file in target folder
-  var folder = DriveApp.getFolderById('0BwtCesct9-1EU0Q3NzAxUGhrMXc'); //Backup storage folder
+  var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
+  var folder = DriveApp.getFolderById(autoBackupFolderId);
   var arryFileDates,file,fileDate,files,
       oldestDate,oldestFileId,oldestFileName,objFilesByDate,objFilesByName;
   console.info('Looking for oldest excel backup file in folder: ' + folder);
