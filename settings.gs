@@ -17,6 +17,8 @@ function initSheet() {
   var emailSnapshotRequestHrDefault = 8; //(24hr) Time of day to request snapshot. Default is 8am.
   var updateSnapshotHrDefault = 9; //(24hr) Time of day to update snapshot. Recommended to be 1 hour after emailSnapshotRequestHr.
   
+  var maxBackupsToKeepDefault = 30; //number of main database backups to keep
+  
   //Location ID's:
   var mainSSidDefault = '10Mz2u6E9pdrKisA4MlH1PXbVaW2qTy3DoP7boiP_wFk';
   var snapshotSSidDefault = '1FcfagPIlAyKJ4IDN9Hd076rXx-_oZGmmEMv06HF4IuE';
@@ -46,6 +48,8 @@ function initSheet() {
   
   scriptProperties.setProperty('emailSnapshotRequestHr', emailSnapshotRequestHrDefault);
   scriptProperties.setProperty('updateSnapshotHr', updateSnapshotHrDefault);
+  
+  scriptProperties.setProperty('maxBackupsToKeep', maxBackupsToKeepDefault);
   
   scriptProperties.setProperty('mainSSid', mainSSidDefault);
   scriptProperties.setProperty('snapshotSSid', snapshotSSidDefault);
@@ -116,6 +120,8 @@ function saveSidebarSettings(form) {
   scriptProperties.setProperty('emailSnapshotRequestHr', form.emailSnapshotRequestHr);
   scriptProperties.setProperty('updateSnapshotHr', form.updateSnapshotHr);
   
+  scriptProperties.setProperty('maxBackupsToKeep', form.maxBackupsToKeep);
+  
   scriptProperties.setProperty('mainSSid', form.mainSSid);
   scriptProperties.setProperty('snapshotSSid', form.snapshotSSid);
   scriptProperties.setProperty('snapshotFolderId', form.snapshotFolderId);
@@ -142,6 +148,8 @@ function getPreferences() {
     emailSnapshotRequestHr: scriptProperties.getProperty('emailSnapshotRequestHr'),
     updateSnapshotHr: scriptProperties.getProperty('updateSnapshotHr'),
     
+    maxBackupsToKeep: scriptProperties.getProperty('maxBackupsToKeep'),
+    
     mainSSid: scriptProperties.getProperty('mainSSid'),
     snapshotSSid: scriptProperties.getProperty('snapshotSSid'),
     snapshotFolderId: scriptProperties.getProperty('snapshotFolderId')
@@ -166,6 +174,8 @@ function restoreDefaultSettings() {
   
   scriptProperties.setProperty('emailSnapshotRequestHr', emailSnapshotRequestHrDefault);
   scriptProperties.setProperty('updateSnapshotHr', updateSnapshotHrDefault);
+  
+  scriptProperties.setProperty('maxBackupsToKeep', maxBackupsToKeepDefault);
   
   scriptProperties.setProperty('mainSSid', mainSSidDefault);
   scriptProperties.setProperty('snapshotSSid', snapshotSSidDefault);

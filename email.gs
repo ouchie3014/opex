@@ -2,6 +2,9 @@ function sendEmail() {
   //Scheduled to run at 4-5AM every day
   var emailAddress = 'fsr@opex.com';
   var subject = "snapshot";
+  var region = loadSetting('region');
+  var warehouse = loadSetting('warehouse');
+  var enableAutoEmailing = loadSetting('enableAutoEmailing');
   var message = region + ',' + warehouse + ',';
   var today = new Date();
   if(today.getDay() == 6 || today.getDay() == 0) {
