@@ -23,6 +23,7 @@ function initSheet() {
   var mainSSidDefault = '10Mz2u6E9pdrKisA4MlH1PXbVaW2qTy3DoP7boiP_wFk';
   var snapshotSSidDefault = '1FcfagPIlAyKJ4IDN9Hd076rXx-_oZGmmEMv06HF4IuE';
   var snapshotFolderIdDefault = '0BwtCesct9-1EQk1jMnZsM2h1aXc';
+  var autoBackupFolderIdDefault = '0BwtCesct9-1EU0Q3NzAxUGhrMXc';
   
   
   // ----------------------------------------------------------------------------------------------- //
@@ -54,6 +55,7 @@ function initSheet() {
   scriptProperties.setProperty('mainSSid', mainSSidDefault);
   scriptProperties.setProperty('snapshotSSid', snapshotSSidDefault);
   scriptProperties.setProperty('snapshotFolderId', snapshotFolderIdDefault);
+  scriptProperties.setProperty('autoBackupFolderId', autoBackupFolderIdDefault);
   
   console.log("Sheet Initialized! Default settings stored!");
 }
@@ -125,6 +127,7 @@ function saveSidebarSettings(form) {
   scriptProperties.setProperty('mainSSid', form.mainSSid);
   scriptProperties.setProperty('snapshotSSid', form.snapshotSSid);
   scriptProperties.setProperty('snapshotFolderId', form.snapshotFolderId);
+  scriptProperties.setProperty('autoBackupFolderId', form.autoBackupFolderId);
   
   console.log("Settings saved.");
   
@@ -152,7 +155,8 @@ function getPreferences() {
     
     mainSSid: scriptProperties.getProperty('mainSSid'),
     snapshotSSid: scriptProperties.getProperty('snapshotSSid'),
-    snapshotFolderId: scriptProperties.getProperty('snapshotFolderId')
+    snapshotFolderId: scriptProperties.getProperty('snapshotFolderId'),
+    autoBackupFolderId: scriptProperties.getProperty('autoBackupFolderId')
   };
   console.log("Settings loaded.");
   return sheetSettings;
@@ -180,6 +184,7 @@ function restoreDefaultSettings() {
   scriptProperties.setProperty('mainSSid', mainSSidDefault);
   scriptProperties.setProperty('snapshotSSid', snapshotSSidDefault);
   scriptProperties.setProperty('snapshotFolderId', snapshotFolderIdDefault);
+  scriptProperties.setProperty('autoBackupFolderId', autoBackupFolderIdDefault);
   
   console.log("Settings restored to default values.");
   
