@@ -5,16 +5,22 @@ function sendEmail() {
   var region = loadSetting('region');
   var warehouse = loadSetting('warehouse');
   var enableAutoEmailing = loadSetting('enableAutoEmailing');
+  var lastSnapshotRequest = loadSetting('lastSnapshotRequest');  
   var message = region + ',' + warehouse + ',';
   var today = new Date();
   if(today.getDay() == 6 || today.getDay() == 0) {
     //do not run on weekends
   } else {
     if (enableAutoEmailing) {
-      MailApp.sendEmail(emailAddress, subject, message);
-      console.log('Email Sent! ... To: ' + emailAddress + ' ... Subject: ' + subject + ' ... Message: ' + message);
+      if (!lastSnapshotRequest || lastSnapshotRequest !== formatDate(new Date())) {  //do not send more than 1 email per day
+        MailApp.sendEmail(emailAddress, subject, message);
+        console.info('Email Sent! ... To: ' + emailAddress + ' ... Subject: ' + subject + ' ... Message: ' + message);
+        saveSetting('lastSnapshotRequest', formatDate(new Date()));
+      } else {
+        console.warn('Snapshot has already been requested today!');
+      }
     } else {
-      console.log('Auto Emailing is disabled in settings!');
+      console.info('Auto Emailing is disabled in settings!');
     }
   };
 }
