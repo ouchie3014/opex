@@ -1,5 +1,5 @@
 function sendEmail() {
-  //Scheduled to run at 4-5AM every day
+  //Scheduled to run at 8-9AM every day
   var emailAddress = 'fsr@opex.com';
   var subject = "snapshot";
   var region = loadSetting('region');
@@ -49,7 +49,7 @@ function updateSnapshot() {
       
       GmailApp.markMessageRead(msg[0]);
       threads[0].moveToArchive();
-      
+      console.info('Email archived.');
       
       //Check if excel file with name exists:
       var NewXlsFileNameChk = folder.getFilesByName(NewXlsFileName);
