@@ -4,7 +4,7 @@ function backupSheetToXlsx() {
   if (!lastBackupToXlsx || lastBackupToXlsx !== formatDate(new Date())) {
     try {
       console.info("Backing up main spreadsheet...");
-      console.time("Backing up main spreadsheet...Completed! Time: ");
+      console.time("Spreadsheet backup completed! Time: ");
       var ss = SpreadsheetApp.getActive();
       var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
       var folder = DriveApp.getFolderById(autoBackupFolderId);
@@ -25,8 +25,8 @@ function backupSheetToXlsx() {
     } catch (f) {
       console.error("backupSheetToXlsx had an error: " + f.toString());
     } finally {
-      console.info("Backing up main spreadsheet...Completed!");
-      console.timeEnd("Backing up main spreadsheet...Completed! Time: ");
+      console.info("Main spreadsheet backed up to gDrive as an xlsx file.");
+      console.timeEnd("Spreadsheet backup completed! Time: ");
     }
   } else {
     console.warn('Main spreadsheet has already been backed up today!');
