@@ -17,15 +17,16 @@ function backupSheetToXlsx() {
       
       var blob = UrlFetchApp.fetch(url, params).getBlob();
       var fileDate = dateFileName(new Date());
+	  var backupName = ss.getName() + " - " + fileDate + ".xlsx";
       
-      blob.setName(ss.getName() + " - " + fileDate + ".xlsx");
+      blob.setName(backupName);
       folder.createFile(blob);
       deleteOlderBackups();
       saveSetting('lastBackupToXlsx', formatDate(new Date()));
     } catch (f) {
       console.error("backupSheetToXlsx had an error: " + f.toString());
     } finally {
-      console.info("Main spreadsheet backed up to gDrive as an xlsx file.");
+      console.info("Main spreadsheet backed up to Google Drive as " + backupName);
       console.timeEnd("Spreadsheet backup completed! Time: ");
     }
   } else {
@@ -36,7 +37,7 @@ function backupSheetToXlsx() {
 
 
 function deleteOlderBackups() {
-  console.info("Deleting older backups...");
+  console.info("Checking for outdated backups...");
   var autoBackupFolderId = loadSetting('autoBackupFolderId'); //Backup storage folder
   var folder = DriveApp.getFolderById(autoBackupFolderId);
   var maxBackupsToKeep = loadSetting('maxBackupsToKeep'); //keep max of 30 files in this folder
