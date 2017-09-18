@@ -2,7 +2,7 @@
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('OPEX Scripts')
-      .addItem('Update HTML Links', 'updateAllHelperLinks')
+      .addItem('Update HTML Links', 'updateHelperLinks')
       .addItem('Request Snapshot Via E-mail', 'sendEmail')
       .addItem('Update Snapshot From Drive', 'updateSnapshot')
       .addItem('Settings', 'showSidebar')
