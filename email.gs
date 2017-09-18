@@ -72,11 +72,11 @@ function updateSnapshot() {
       
       //Check if gSheet with name already exists:
       if (gSheetName.hasNext()) {
-        console.info( gSheetName + " found. Updating sheet with new data.");
         var file = gSheetName.next();
+        console.info( file + ".gsheet found. Updating sheet with new data.");
         Drive.Files.update(resource, file.getId(), excelFile);
       } else {
-        console.warn( "Did not find " + gSheetName + ". Creating new file with latest data.");
+        console.warn( "Did not find " + gSheetName.next() + ". Creating new file with latest data.");
         Drive.Files.insert(resource, excelFile);
       }
       

@@ -26,7 +26,7 @@ function backupSheetToXlsx() {
     } catch (f) {
       console.error("backupSheetToXlsx had an error: " + f.toString());
     } finally {
-      console.info("Main spreadsheet backed up to Google Drive as " + backupName);
+      console.info("Main spreadsheet backed up to Google Drive as '" + backupName + "'");
       console.timeEnd("Spreadsheet backup completed! Time: ");
     }
   } else {
