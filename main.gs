@@ -99,9 +99,13 @@ function dateFileName(rawDate) {
 
 function onEdit () {
   var sheetNameMain = loadSetting('sheetNameMain');
-  var activeRow = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getRow();
-  console.info("Sheet has been edited, updating row: " + activeRow);
-  updateHelperLinks(activeRow, 1); //Update last edited row
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var activeSheetName = sheet.getName();
+  if (activeSheetName == sheetNameMain) {
+    var activeRow = sheet.getActiveCell().getRow();
+    console.info("Sheet has been edited, updating row: " + activeRow);
+    updateHelperLinks(activeRow, 1); //Update last edited row
+  }
 }
 
 function getMainData (startRow,numRows) {
