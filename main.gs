@@ -5,7 +5,7 @@ function onOpen() {
       .addItem('Update HTML Links', 'updateHelperLinks')
       .addItem('Request Snapshot Via E-mail', 'sendEmail')
       .addItem('Update Snapshot From Drive', 'updateSnapshot')
-      .addItem('Settings', 'showSidebar')
+      //.addItem('Settings', 'showSidebar') needs to be fixed with new settings location
       .addToUi();
 }
 
@@ -67,7 +67,6 @@ function updateAllTriggers() {
   } else {
     console.warn('All triggers have already been updated today!');
   }
-  
 }
 
 function deleteTriggers() {
