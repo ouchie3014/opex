@@ -2,7 +2,8 @@
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('OPEX Scripts')
-      .addItem('Update HTML Links', 'updateHelperLinks')
+      .addItem('Update All HTML Links', 'updateHelperLinks')
+      .addItem('Update Last 50 HTML Links', 'updateRecentHelperLinks')
       .addItem('Request Snapshot Via E-mail', 'sendEmail')
       .addItem('Update Snapshot From Drive', 'updateSnapshot')
       //.addItem('Settings', 'showSidebar') needs to be fixed with new settings location
@@ -130,6 +131,15 @@ function getPmData () {
   var data = pmDataSheet.getDataRange().getValues();
   console.log("Retrieved Maintenance sheet data");
   return data;
+}
+
+function updateRecentHelperLinks() {
+  var sheetNameMain = loadSetting('sheetNameMain');
+  var mainSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetNameMain);
+  var lastRow = mainSheet.getLastRow();
+  var startRow = lastRow - 49;
+  console.log("last: " + lastRow + ". start: " + startRow);
+  updateHelperLinks(startRow, 50);
 }
 
 function updateHelperLinks(startRow,numRows) {

@@ -94,10 +94,12 @@ function saveSetting(name,value) {
     if (data[i][0] == name) {
       sheet.getRange(i + 1, 2).setValue(value);
       console.log("Setting saved!");
+      break;
     } else if (i+1 == data.length) {
       console.warn("Setting not found, making new entry!")    
       sheet.getRange(i + 2, 1).setValue(name);
       sheet.getRange(i + 2, 2).setValue(value);
+      break;
     }
   }
   lock.releaseLock();
